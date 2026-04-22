@@ -10,11 +10,11 @@ const roads = [
         name: "connexion",
         component: Connexion
     },
-    {
-        path: "/",
-        name: "App",
-        component: App
-    },
+    // {
+    //     path: "/",
+    //     name: "App",
+    //     component: App
+    // },
 ]
 
 const router = createRouter({

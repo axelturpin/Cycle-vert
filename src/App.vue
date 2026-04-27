@@ -48,24 +48,37 @@ body{
   background-color: #A3B18A;
   border-radius: 20px;
   padding: 5px 20px;
-  margin: 10px;
-  width: 80vw;
+  margin: 18px;
+  width: calc(30vw + 100px);
   height: 7vh;
 }
 
 .top5vh{
   position: absolute;
-  top: calc(5vh + 92px);
+  top: calc(5vh + 90px);
 }
 
 .deconnexion{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   right: 0px;
 }
 
 .vh{
     min-height: calc(100vh - 92px - 110px);
+}
+
+@media (min-width: 1024px) {
+
+.deconnexion{
+  display: flex;
+  position: absolute;
+  right: 0px;
+  width: 200px;
+  height: 50px;
+}
+
 }
 </style>

@@ -29,6 +29,12 @@ body{
   flex-direction: column;
 }
 
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .block{
     background-color: #F3E5AB;
 }
@@ -53,9 +59,9 @@ body{
   height: 7vh;
 }
 
-.top5vh{
-  position: absolute;
-  top: calc(5vh + 90px);
+.top50{
+  position: relative;
+  top: 50px;
 }
 
 .deconnexion{
@@ -68,6 +74,10 @@ body{
 
 .vh{
     min-height: calc(100vh - 92px - 110px);
+}
+
+.none{
+    text-decoration: none;
 }
 
 @media (min-width: 1024px) {

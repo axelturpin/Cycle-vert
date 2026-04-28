@@ -1,5 +1,6 @@
 import App from "@/App.vue";
 import AccueilClient from "@/client/AccueilClient.vue";
+import AjoutCollecte from "@/client/AjoutCollecte.vue";
 import NotifClient from "@/client/NotifClient.vue";
 import Connexion from "@/components/Connexion.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -22,11 +23,11 @@ const roads = [
         name: "NotifClient",
         component: NotifClient
     },
-    // {
-    //     path: "/",
-    //     name: "App",
-    //     component: App
-    // },
+    {
+        path: "/ajout-client",
+        name: "AjoutCollecte",
+        component: AjoutCollecte
+    },
 ]
 
 const router = createRouter({

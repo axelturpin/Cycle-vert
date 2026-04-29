@@ -7,20 +7,21 @@ import { store } from './store';
 
 export default {
   components: { Header },
-  setup() {
+  // setup() {
     // const route = useRoute()
 
     // Propriété calculée basée sur la route courante
     // const AccueilRole = computed(() => route.meta.Accueil || '/')
 
     // return { AccueilRole }
-    return { AccueilRole: store.Accueil }
-  }
+//     return { AccueilRole: store.Accueil }
+//   }
 }
 </script>
 
 <template>
-  <Header :Accueil="AccueilRole"></Header>
+  <Header></Header>
+  <!-- <Header :Accueil="AccueilRole"></Header> -->
   <div class="vh">
     <router-view/>
   </div>

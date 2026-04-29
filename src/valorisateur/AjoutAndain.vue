@@ -1,3 +1,18 @@
+<script>
+export default{
+    data(){
+        return{
+            Accueiltemp: '/accueil-valorisateur'
+        }
+    },
+    provide() {
+      return {
+        Accueiltemp: this.Accueiltemp
+      }
+    }
+}
+</script>
+
 <template>
     <div>
         

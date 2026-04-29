@@ -20,6 +20,8 @@
             <div>
                 <router-link to="/accueil-client" class="col-center btn">Connexion client</router-link>
                 <router-link to="/accueil-valorisateur" class="col-center btn">Connexion valorisateur</router-link>
+                <router-link to="/accueil-collecteur" class="col-center btn">Connexion collecteur</router-link>
+                <router-link to="/accueil-admin" class="col-center btn">Connexion Admin</router-link>
             </div>
         </form>
     </div>

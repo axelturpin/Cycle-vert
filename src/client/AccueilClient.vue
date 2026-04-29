@@ -4,6 +4,7 @@ export default{
     return {
       planingTemplate: null,
       historiqueTemplate: null,
+      Accueiltemp: '/accueil-client'
     }
   },
   methods:{
@@ -21,7 +22,12 @@ export default{
     this.historiqueTemplate = document.querySelector(".historique");
     this.planing();
   },
-  props:["Accueil"]
+  // props:["Accueil"],
+    provide() {
+      return {
+        Accueiltemp: this.Accueiltemp
+      }
+    }
 }
 </script>
 

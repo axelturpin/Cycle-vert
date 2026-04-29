@@ -1,3 +1,17 @@
+<script>
+export default{
+    data(){
+        return{
+            Accueiltemp: '/accueil-client'
+        }
+    },
+    provide() {
+      return {
+        Accueiltemp: this.Accueiltemp
+      }
+    }
+}</script>
+
 <template>
     <div>
         

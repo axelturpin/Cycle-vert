@@ -3,27 +3,39 @@ export default{
   data(){
     return {
       planingTemplate: null,
-      valorisationTemplate: null,
-      Accueiltemp: "/accueil-valorisateur",
+      itinéraireTemplate: null,
+      toogle: false,
+      Accueiltemp: "/accueil-collecteur"
     }
   },
   methods:{
     planing(){
       this.planingTemplate.style.display = "block";
-      this.valorisationTemplate.style.display = "none";
+      this.itinéraireTemplate.style.display = "none";
     },
-    valorisation(){
+    itinéraire(){
       this.planingTemplate.style.display = "none";
-      this.valorisationTemplate.style.display = "block";
+      this.itinéraireTemplate.style.display = "block";
+    },
+    switch(){
+        this.toogle = !this.toogle;
+        const menu = document.querySelector(".menu-collecteur");
+        console.log(this.toogle);
+        console.log(menu);
+        if(this.toogle){
+            menu.style.display = "block";
+        }else{
+            menu.style.display = "none";
+        }
     }
   },
   mounted(){
     this.planingTemplate = document.querySelector(".planing");
-    this.valorisationTemplate = document.querySelector(".valorisation");
+    this.itinéraireTemplate = document.querySelector(".itinéraire");
     this.planing();
   },
-  props:["Accueil"],
-        provide() {
+  // props:["Accueil"]
+      provide() {
       return {
         Accueiltemp: this.Accueiltemp
       }
@@ -35,13 +47,14 @@ export default{
     <router-link to="/" class="btn deconnexion"><div class="div-center">Déconnexion</div></router-link>
 
     <div class="col-center">
-            <router-link to="/ajout-andain" class="col-center none"><button class="big-btn top50">Ajout Andain</button></router-link>
+    <button class="center top50 big-btn" @click="switch">Menu</button>
     </div>
 
-    <h3 class="center top50">Date actuelle: 26/05/2026</h3>
-    <div class="center top50">
-            <button class="switch" @click="planing">Planing</button>
-            <button class="switch" @click="valorisation">Valorisation</button>
+    <div class="center top50 menu-collecteur">
+        <div>collectes</div>
+        <div>Itinéraire</div>
+        <div>Suivi anomalies</div>
+        <div>Informer</div>
     </div>
 
     <div class="planing">
@@ -69,38 +82,8 @@ export default{
       </table>
     </div>
 
-    <div class="valorisation">
-      <h3 class="center top50">valorisation</h3>
-      <table class="col-center top50">
-          <thead>
-              <tr>
-                  <th>Lieu</th>
-                  <th>Andain n°</th>
-                  <th>Etape</th>
-                  <th>temps restant</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>Paris</td>
-                  <td>1</td>
-                  <td>Higiénisation</td>
-                  <td>12 semaines</td>
-              </tr>
-              <tr>
-                  <td>Dinard</td>
-                  <td>2</td>
-                  <td>Fermentation</td>
-                  <td>4 semaines</td>
-              </tr>
-              <tr>
-                  <td>Dinard</td>
-                  <td>3</td>
-                  <td>Maturation</td>
-                  <td>12 semaines</td>
-              </tr>
-          </tbody>
-      </table>
+    <div class="itinéraire">
+      <h3 class="center top50">itinéraire</h3>
     </div>
 
 </template>
@@ -115,6 +98,11 @@ export default{
 
 .switch:focus{
     opacity: 0.64;
+}
+
+.menu-collecteur{
+    display: none;
+    position: absolute;
 }
 
 table {

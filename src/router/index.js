@@ -1,7 +1,9 @@
+import AccueilAdmin from "@/admin/AccueilAdmin.vue";
 import App from "@/App.vue";
 import AccueilClient from "@/client/AccueilClient.vue";
 import AjoutCollecte from "@/client/AjoutCollecte.vue";
 import NotifClient from "@/client/NotifClient.vue";
+import AccueilCollecteur from "@/collecteur/AccueilCollecteur.vue";
 import Connexion from "@/components/Connexion.vue";
 import AccueilValorisateur from "@/valorisateur/AccueilValorisateur.vue";
 import AjoutAndain from "@/valorisateur/AjoutAndain.vue";
@@ -47,6 +49,16 @@ const roads = [
         path: "/notifications-valorisateur",
         name: "NotifValorisateur",
         component: NotifValorisateur
+    },
+    {
+        path: "/accueil-collecteur",
+        name: "AccueilCollecteur",
+        component: AccueilCollecteur,
+    },
+    {
+        path: "/accueil-admin",
+        name: "AccueilAdmin",
+        component: AccueilAdmin,
     },
 ]
 

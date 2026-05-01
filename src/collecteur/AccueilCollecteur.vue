@@ -4,28 +4,28 @@ export default{
     return {
       planingTemplate: null,
       itinéraireTemplate: null,
-      toogle: false,
       Accueiltemp: "/accueil-collecteur"
     }
   },
   methods:{
     planing(){
-      this.planingTemplate.style.display = "block";
-      this.itinéraireTemplate.style.display = "none";
+        this.planingTemplate.style.display = "block";
+        this.itinéraireTemplate.style.display = "none";
+        const menu = document.querySelector(".menu-collecteur");
+        menu.style.display = "none";
     },
     itinéraire(){
-      this.planingTemplate.style.display = "none";
-      this.itinéraireTemplate.style.display = "block";
-    },
-    switch(){
-        this.toogle = !this.toogle;
+        this.planingTemplate.style.display = "none";
+        this.itinéraireTemplate.style.display = "block";
         const menu = document.querySelector(".menu-collecteur");
-        console.log(this.toogle);
-        console.log(menu);
-        if(this.toogle){
-            menu.style.display = "block";
-        }else{
+        menu.style.display = "none";
+    },
+    switch2(){
+        const menu = document.querySelector(".menu-collecteur");
+        if(menu.style.display == "block"){
             menu.style.display = "none";
+        }else{
+            menu.style.display = "block";
         }
     }
   },
@@ -44,15 +44,21 @@ export default{
 </script>
 
 <template>
+    <header>
+        <router-link :to="this.Accueiltemp || this.Accueil"><img src="/img/Home Page.png" alt="Accueil"></router-link>
+        <h1 class="col-center">Cycle vert</h1>
+        <router-link to="/notifications-client"><img src="/img/Doorbell.png" alt="Notifications"></router-link>
+    </header>
+
     <router-link to="/" class="btn deconnexion"><div class="div-center">Déconnexion</div></router-link>
 
     <div class="col-center">
-    <button class="center top50 big-btn" @click="switch">Menu</button>
+    <button class="center top50 big-btn" @click="switch2">Menu</button>
     </div>
 
     <div class="center top50 menu-collecteur">
-        <div>collectes</div>
-        <div>Itinéraire</div>
+        <div @click="planing">collectes</div>
+        <div @click="itinéraire">Itinéraire</div>
         <div>Suivi anomalies</div>
         <div>Informer</div>
     </div>
@@ -71,7 +77,7 @@ export default{
               <tr>
                   <td>Paris</td>
                   <td>26/05/2026</td>
-                  <td>12h00</td>
+                  <td>12h01</td>
               </tr>
               <tr>
                   <td>Dinard</td>
@@ -141,5 +147,24 @@ tfoot td {
   font-weight: bold;
 }
 
+    .menu-collecteur{
+        background-color: #A3B18A;
+        position: absolute;
+        transform: translateX(-50%) translateY(-50%);
+        top: calc(92px + 210px);
+        left: 50vw;
+        border-radius: 0px 0px 20px 20px;
+        z-index: 2;
+    }
+
+    .menu-collecteur *{
+        width: 100px;
+        height: 48px;
+        border: 1px solid black;
+    }
+
+    .menu-collecteur *:last-child{
+        border-radius: 0px 0px 20px 20px;
+    }
 
 </style>

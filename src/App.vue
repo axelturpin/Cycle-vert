@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-  <Header></Header>
+  <!-- <Header></Header> -->
   <!-- <Header :Accueil="AccueilRole"></Header> -->
   <div class="vh">
     <router-view/>
@@ -33,6 +33,13 @@ export default {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+}
+
+header{
+    height: 92px;
+    background-color: #A3B18A;
+    display: flex;
+    justify-content: space-between;
 }
 
 body{
@@ -76,9 +83,19 @@ body{
   height: 7vh;
 }
 
+.top90{
+  position: relative;
+  top: 90px;
+}
+
 .top50{
   position: relative;
   top: 50px;
+}
+
+.top0{
+    position: relative;
+  top: 0px;
 }
 
 .deconnexion{
@@ -90,7 +107,8 @@ body{
 }
 
 .vh{
-    min-height: calc(100vh - 92px - 110px);
+    min-height: calc(100vh - 110px);
+    /* min-height: calc(100vh - 92px - 110px); */
 }
 
 .none{

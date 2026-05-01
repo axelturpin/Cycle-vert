@@ -2,53 +2,81 @@
     export default{
         data(){
             return{
-
+                Accueiltemp: '/accueil-admin'
             }
         },
         methods:{
             orga(){
-                console.log("click");
-                document.querySelector(".menu-organisation").style.display = "block";
+                const menuOrga = document.querySelector(".menu-organisation")
+                if(menuOrga.style.display === "block"){
+                    menuOrga.style.display = "none"
+                }else{
+                    menuOrga.style.display = "block";
+                }
             },
             stats(){
-                console.log("click");
-                document.querySelector(".menu-stats").style.display = "block";
+                const menuStats = document.querySelector(".menu-stats")
+                if(menuStats.style.display === "block"){
+                    menuStats.style.display = "none"
+                }else{
+                    menuStats.style.display = "block";
+                }
             },
             gestion(){
-                console.log("click");
-                document.querySelector(".menu-utilisateurs").style.display = "block";
+                const menuUtilisateurs = document.querySelector(".menu-utilisateurs")
+                if(menuUtilisateurs.style.display === "block"){
+                    menuUtilisateurs.style.display = "none"
+                }else{
+                    menuUtilisateurs.style.display = "block";
+                }
             }
+        },
+        mounted(){
+            document.querySelector(".menu-organisation").style.display = "none";
+            document.querySelector(".menu-stats").style.display = "none";
+            document.querySelector(".menu-utilisateurs").style.display = "none";
+            // document.querySelector("nav").style.display = "block";
         }
     }
 </script>
 
 <template>
-    <nav>
-        <div class="organisation"@click="orga">Organisation</div>
-        <div class="stats" @click="stats">Stats</div>
-        <div class="gestion-utilisateurs" @click="gestion">Gestion utilisateurs</div>
-    </nav>
+    <header>
+        <router-link :to="this.Accueiltemp || this.Accueil"><img src="/img/Home Page.png" alt="Accueil"></router-link>
+        <h1 class="col-center">Cycle vert</h1>
+        <router-link to="/notifications-client"><img src="/img/Doorbell.png" alt="Notifications"></router-link>
+    </header>
+
+    <div class="center div">
+        <nav>
+            <button class="organisation"@click="orga">Organisation</button>
+            <button class="stats" @click="stats">Stats</button>
+            <button class="gestion-utilisateurs" @click="gestion">Gestion utilisateurs</button>
+        </nav>
+    </div>
 
     <router-link to="/" class="btn deconnexion"><div class="div-center">Déconnexion</div></router-link>
 
-    <div class="menus">
-        <div class="center top50 menu-organisation">
+    <div class="center div">
+    <div class="menus top90">
+        <div class="col-center menu-organisation">
             <div>Gestion tournées</div>
             <div>Gestion clients</div>
             <div>Suivi collecte</div>
             <div>Suivi compost</div>
         </div>
-        <div class="center top50 menu-stats">
+        <div class="col-center menu-stats">
             <div>Stats clients</div>
             <div>Stats biodechets</div>
             <div>Stats compost</div>
             <div>Stats collecte</div>
         </div>
-        <div class="center top50 menu-utilisateurs">
+        <div class="col-center menu-utilisateurs">
             <div>Gestion collecteurs</div>
             <div>Gestion valorisateurs</div>
             <div>Gestion clients</div>
         </div>
+    </div>
     </div>
 
 
@@ -56,16 +84,88 @@
 </template>
 
 <style scoped>
-    nav{
+
+    button{
+        border: none;
+        background-color: #A3B18A;
+        padding: 20px 0px;
+    }
+
+    .organisation, .stats, .gestion-utilisateurs{
+        font-size: 1.2rem;
+    }
+
+    .div{
+        background-color: #A3B18A;
         width: 100vw;
         height: 40px;
+    }
+
+    nav{
+        width: 400px;
+        gap: 40px;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
+    }
+
+    .menus{
+        gap: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu-organisation, .menu-stats, .menu-utilisateurs{
         background-color: #A3B18A;
+        position: absolute;
+        /* top: calc(92px); */
+        border-radius: 0px 0px 20px 20px;
     }
 
     .menu-organisation{
-        
+        top: calc(-80px);
+        left: -10vw;
     }
+    .menu-stats{
+        top: calc(-80px);
+        left: -3.5vw;
+    }
+    .menu-utilisateurs{
+        top: calc(-80px);
+        left: calc(3vw - 4px);
+    }
+
+    .menus * *{
+        width: 100px;
+        height: 48px;
+        border: 1px solid black;
+    }
+
+    .menus *:last-child{
+        border-radius: 0px 0px 20px 20px;
+    }
+
+@media (max-width: 768px) {
+    button{
+        border: none;
+        background-color: #A3B18A;
+        padding: 0px 0px;
+    }
+    .organisation, .stats, .gestion-utilisateurs{
+        font-size: 1rem;
+    }
+    .menu-organisation{
+        top: calc(-80px);
+        left: -45vw;
+    }
+    .menu-stats{
+        top: calc(-80px);
+        left: -14vw;
+    }
+    .menu-utilisateurs{
+        top: calc(-80px);
+        left: calc(16vw - 4px);
+    }
+}
 </style>

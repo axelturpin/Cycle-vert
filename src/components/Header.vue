@@ -8,12 +8,13 @@ export default{
         }
     },
     computed(){
-        this.Accueil = this.Accueiltemp;
-    },
-    mounted(){
+        this.Accueiltemp;
         this.Accueil = this.Accueiltemp;
         console.log(this.Accueil);
         console.log(this.Accueiltemp);
+    },
+    mounted(){
+        // this.Accueil = this.Accueiltemp;
     },
     // updated(){
     //     this.Accueil = this.Accueiltemp;

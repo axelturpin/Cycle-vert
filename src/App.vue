@@ -54,6 +54,7 @@ body{
 }
 
 .center{
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,12 +108,16 @@ body{
 }
 
 .vh{
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 110px - 50px);
     /* min-height: calc(100vh - 92px - 110px); */
 }
 
 .none{
     text-decoration: none;
+}
+
+.notif{
+  background-color: rgb(255, 78, 78);
 }
 
 @media (min-width: 1024px) {

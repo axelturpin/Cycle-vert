@@ -44,7 +44,7 @@
     <header>
         <router-link :to="this.Accueiltemp || this.Accueil"><img src="/img/Home Page.png" alt="Accueil"></router-link>
         <h1 class="col-center">Cycle vert</h1>
-        <router-link to="/notifications-client"><img src="/img/Doorbell.png" alt="Notifications"></router-link>
+        <router-link to=""><img :class="{notif: true}" src="/img/Doorbell.png" alt="Notifications"></router-link>
     </header>
 
     <div class="center div">
@@ -60,21 +60,21 @@
     <div class="center div">
     <div class="menus top90">
         <div class="col-center menu-organisation">
-            <div>Gestion tournées</div>
-            <div>Gestion clients</div>
-            <div>Suivi collecte</div>
-            <div>Suivi compost</div>
+            <div class="center">Gestion tournées</div>
+            <div class="center">Gestion clients</div>
+            <div class="center">Suivi collecte</div>
+            <div class="center">Suivi compost</div>
         </div>
         <div class="col-center menu-stats">
-            <div>Stats clients</div>
-            <div>Stats biodechets</div>
-            <div>Stats compost</div>
-            <div>Stats collecte</div>
+            <div class="center">Stats clients</div>
+            <div class="center">Stats biodechets</div>
+            <div class="center">Stats compost</div>
+            <div class="center">Stats collecte</div>
         </div>
         <div class="col-center menu-utilisateurs">
-            <div>Gestion collecteurs</div>
-            <div>Gestion valorisateurs</div>
-            <div>Gestion clients</div>
+            <div class="center">Gestion collecteurs</div>
+            <div class="center">Gestion valorisateurs</div>
+            <div class="center">Gestion clients</div>
         </div>
     </div>
     </div>

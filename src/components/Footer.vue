@@ -5,7 +5,7 @@ export default{
 </script>
 
 <template>
-    <footer class="col-center">
+    <footer class="col-center top50">
         <div>
             <a target="_blank" href="https://icons8.com/icon/61187/filled-appointment-reminders">App</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
         </div>

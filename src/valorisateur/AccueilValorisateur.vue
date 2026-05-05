@@ -2,25 +2,25 @@
 export default{
   data(){
     return {
-      planingTemplate: null,
+      receptionTemplate: null,
       valorisationTemplate: null,
       Accueiltemp: "/accueil-valorisateur",
     }
   },
   methods:{
-    planing(){
-      this.planingTemplate.style.display = "block";
+    reception(){
+      this.receptionTemplate.style.display = "block";
       this.valorisationTemplate.style.display = "none";
     },
     valorisation(){
-      this.planingTemplate.style.display = "none";
+      this.receptionTemplate.style.display = "none";
       this.valorisationTemplate.style.display = "block";
     }
   },
   mounted(){
-    this.planingTemplate = document.querySelector(".planing");
+    this.receptionTemplate = document.querySelector(".reception");
     this.valorisationTemplate = document.querySelector(".valorisation");
-    this.planing();
+    this.reception();
   },
   props:["Accueil"],
         provide() {
@@ -35,7 +35,7 @@ export default{
     <header>
         <router-link :to="this.Accueiltemp || this.Accueil"><img src="/img/Home Page.png" alt="Accueil"></router-link>
         <h1 class="col-center">Cycle vert</h1>
-        <router-link to="/notifications-client"><img src="/img/Doorbell.png" alt="Notifications"></router-link>
+        <router-link to="/notifications-valorisateur"><img :class="{notif: true}" src="/img/Doorbell.png" alt="Notifications"></router-link>
     </header>
 
     <router-link to="/" class="btn deconnexion"><div class="div-center">Déconnexion</div></router-link>
@@ -46,13 +46,13 @@ export default{
 
     <h3 class="center top50">Date actuelle: 26/05/2026</h3>
     <div class="center top50">
-            <button class="switch" @click="planing">Planing</button>
+            <button class="switch" @click="reception">reception</button>
             <button class="switch" @click="valorisation">Valorisation</button>
     </div>
 
-    <div class="planing">
-      <h3 class="center top50">Planing</h3>
-      <table class="col-center top50">
+    <div class="reception  top50">
+      <h3 class="center">reception</h3>
+      <table class="col-center">
           <thead>
               <tr>
                   <th>Lieu</th>
@@ -75,9 +75,31 @@ export default{
       </table>
     </div>
 
-    <div class="valorisation">
-      <h3 class="center top50">valorisation</h3>
-      <table class="col-center top50">
+    <div class="valorisation  top50">
+      <h3 class="center">valorisation</h3>
+      <div class="cartes">
+        <table class="col-center">
+            <tbody>
+                    <tr><th>Lieu: Paris</th></tr>
+                    <tr><th><label for="date">Date: </label><input class="date" type="date" id="date"></th></tr>
+                    <tr><th><label for="date">Heure: </label><input class="heure" type="time" id="heure"></th></tr>
+                    <tr><th><label for="étape">étape: </label><input class="étape" type="text" id="étape"></th></tr>
+                    <tr><th><button class="btn">Enregistrer analyses</button></th></tr>
+                    <tr><th><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check"></th></tr>
+                    <tr><th><label for="check2">Higiénisation: </label><input type="checkbox" v-model="check2" id="check2"></th></tr>
+                    <tr><th><label for="température">températue en °C: </label><input class="températue" type="number" id="température"></th></tr>
+                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids"></th></tr>
+                    <tr><th><div class="center"><button class="btn">Historique de l'andain</button></div></th></tr>
+                    <tr><th>Date relevé à faire: {{ "aujourd'hui" }}</th></tr>
+
+                    <tr><th>compteur 55°C / 7 jours</th></tr>
+                    <tr><th>contrôle 3 relevés / semaine</th></tr>
+
+
+            </tbody>
+        </table>
+    </div>
+      <!-- <table class="col-center top50">
           <thead>
               <tr>
                   <th>Lieu</th>
@@ -106,7 +128,7 @@ export default{
                   <td>12 semaines</td>
               </tr>
           </tbody>
-      </table>
+      </table> -->
     </div>
 
 </template>
@@ -159,5 +181,12 @@ tfoot td {
   font-weight: bold;
 }
 
+.cartes *{
+    margin: 20px;
+}
+
+.bac{
+    width: 30px;
+}
 
 </style>

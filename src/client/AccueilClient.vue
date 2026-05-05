@@ -35,7 +35,7 @@ export default{
       <header>
         <router-link :to="this.Accueiltemp || this.Accueil"><img src="/img/Home Page.png" alt="Accueil"></router-link>
         <h1 class="col-center">Cycle vert</h1>
-        <router-link to="/notifications-client"><img src="/img/Doorbell.png" alt="Notifications"></router-link>
+        <router-link to="/notifications-client"><img :class="{notif: true}" src="/img/Doorbell.png" alt="Notifications"></router-link>
     </header>
     
     <router-link to="/" class="btn deconnexion"><div class="div-center">Déconnexion</div></router-link>
@@ -58,6 +58,7 @@ export default{
                   <th>Lieu</th>
                   <th>Date</th>
                   <th>Heure</th>
+                  <th>Annuler</th>
               </tr>
           </thead>
           <tbody>
@@ -65,11 +66,13 @@ export default{
                   <td>Paris</td>
                   <td>26/05/2026</td>
                   <td>12h00</td>
+                  <td><button class="btn">Annuler</button></td>
               </tr>
               <tr>
                   <td>Dinard</td>
                   <td>26/12/2026</td>
                   <td>15h15</td>
+                  <td><button class="btn">Annuler</button></td>
               </tr>
           </tbody>
       </table>
@@ -100,9 +103,15 @@ export default{
       </table>
     </div>
 
+<div class="center">
+  <!-- <button class="btn top50">DAC</button>  a recevoir-->
+  <button class="btn top50">Bilan annuel</button>
+</div>
+
 </template>
 
 <style scoped>
+
 .switch{
     background-color: #A3B18A;
     border: 1px solid black;

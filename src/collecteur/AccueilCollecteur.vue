@@ -100,6 +100,7 @@ export default{
                     <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs"></label></th></tr>
                     <tr><th><label for="échange1:1">échange1:1 <input type="checkbox" id="échange1:1"></label></th></tr>
                     <tr><th><label for="température">températue: <input class="bac" type="number" id="température"></label></th></tr>
+                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids"></th></tr>
                     <tr><th><div class="center"><button class="btn">Anomalie</button></div></th></tr>
                     <tr><th><label for="check">Valider: <input type="checkbox" v-model="check1" id="check"></label></th></tr>
             </tbody>
@@ -112,6 +113,7 @@ export default{
                     <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs"></label></th></tr>
                     <tr><th><label for="échange1:1">échange1:1 <input type="checkbox" id="échange1:1"></label></th></tr>
                     <tr><th><label for="température">températue: <input class="bac" type="number" id="température"></label></th></tr>
+                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids"></th></tr>
                     <tr><th><div class="center"><button class="btn">Anomalie</button></div></th></tr>
                     <tr><th><label for="check">Valider: <input type="checkbox" v-model="check1" id="check"></label></th></tr>
             </tbody>
@@ -120,7 +122,6 @@ export default{
         <div class="center">Nombre de points collectés: 1</div>
         <div class="center">Nombre de points non collectés: 1</div>
         <div class="col-center">
-            <button class="btn">Suivie anomalies</button>
             <button class="btn">Cloturer tournée</button>
         </div>
       </div>

@@ -114,6 +114,7 @@ body{
 
 .none{
     text-decoration: none;
+    color: black;
 }
 
 .notif{

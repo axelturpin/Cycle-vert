@@ -1,4 +1,7 @@
 import AccueilAdmin from "@/admin/AccueilAdmin.vue";
+import GestionClients from "@/admin/GestionClients.vue";
+import GestionTournées from "@/admin/GestionTournées.vue";
+import NotifAdmin from "@/admin/NotifAdmin.vue";
 import App from "@/App.vue";
 import AccueilClient from "@/client/AccueilClient.vue";
 import AjoutCollecte from "@/client/AjoutCollecte.vue";
@@ -59,6 +62,21 @@ const roads = [
         path: "/accueil-admin",
         name: "AccueilAdmin",
         component: AccueilAdmin,
+    },
+    {
+        path: "/gestion-tournees",
+        name: "GestionTournées",
+        component: GestionTournées,
+    },
+    {
+        path: "/notifications-admin",
+        name: "NotifAdmin",
+        component: NotifAdmin,
+    },
+    {
+        path: "/gestion-clients",
+        name: "GestionClients",
+        component: GestionClients,
     },
 ]
 

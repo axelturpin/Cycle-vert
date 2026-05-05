@@ -83,12 +83,19 @@ export default{
                     <tr><th>Lieu: Paris</th></tr>
                     <tr><th><label for="date">Date: </label><input class="date" type="date" id="date"></th></tr>
                     <tr><th><label for="date">Heure: </label><input class="heure" type="time" id="heure"></th></tr>
-                    <tr><th><label for="étape">étape: </label><input class="étape" type="text" id="étape"></th></tr>
+                    <tr><th>étape: 
+                        <select name="" id="">
+                            <option value="Higiénisation">Higiénisation</option>
+                            <option value="Fermentation">Fermentation</option>
+                            <option value="Maturation">Maturation</option>
+                        </select>
+                        <br>
+                    Temps restant: 12 semaines
+                    </th></tr>
                     <tr><th><button class="btn">Enregistrer analyses</button></th></tr>
                     <tr><th><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check"></th></tr>
                     <tr><th><label for="check2">Higiénisation: </label><input type="checkbox" v-model="check2" id="check2"></th></tr>
                     <tr><th><label for="température">températue en °C: </label><input class="températue" type="number" id="température"></th></tr>
-                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids"></th></tr>
                     <tr><th><div class="center"><button class="btn">Historique de l'andain</button></div></th></tr>
                     <tr><th>Date relevé à faire: {{ "aujourd'hui" }}</th></tr>
 

@@ -50,9 +50,10 @@ export default{
             <button class="switch" @click="historique">Historique</button>
     </div>
 
-    <div class="planing">
-      <h3 class="center top50">Planing</h3>
-      <table class="col-center top50">
+    <div class="planing col-center top50">
+      <h3 class="center">Planing</h3>
+      <div class="center">
+      <table>
           <thead>
               <tr>
                   <th>Lieu</th>
@@ -77,10 +78,12 @@ export default{
           </tbody>
       </table>
     </div>
+  </div>
 
-    <div class="historique">
-      <h3 class="center top50">Historique</h3>
-      <table class="col-center top50">
+    <div class="historique col-center top50">
+      <h3 class="center">Historique</h3>
+      <div class="center">
+      <table>
           <thead>
               <tr>
                   <th>Lieu</th>
@@ -102,9 +105,11 @@ export default{
           </tbody>
       </table>
     </div>
+    </div>
 
 <div class="center">
   <!-- <button class="btn top50">DAC</button>  a recevoir-->
+  <button class="btn top50">Consignes de tri</button>
   <button class="btn top50">Bilan annuel</button>
 </div>
 

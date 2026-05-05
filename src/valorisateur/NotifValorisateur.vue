@@ -25,7 +25,7 @@ export default{
 
    <h2 class="top50 center">Notifications</h2> 
     <div class="notifications top50 center">
-        <div class="notif top50 center">
+        <div class="notification top50 center">
             <p>Notification</p>
         </div>
     </div>
@@ -33,7 +33,7 @@ export default{
 
 <style scoped>
 
-    .notif{
+    .notification{
         background-color: #F3E5AB;
         width: 180px;
         height: auto;

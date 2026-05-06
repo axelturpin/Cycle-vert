@@ -4,21 +4,26 @@ import NavAdmin from '@/components/NavAdmin.vue';
         data(){
             return{
                 carteAjout: null,
+                carteAjoutMobile: null,
             }
         },
         methods:{
             carteAjouter(){
                 if(this.carteAjout.style.display === "block"){
                     this.carteAjout.style.display = "none";
+                    this.carteAjoutMobile.style.display = "none";
                 }
                 else{
                     this.carteAjout.style.display = "block";
+                    this.carteAjoutMobile.style.display = "block";
                 }
             }
         },
         mounted(){
             this.carteAjout = document.querySelector(".ajout");
             this.carteAjout.style.display = "none";
+            this.carteAjoutMobile = document.querySelector(".ajout-mobile");
+            this.carteAjoutMobile.style.display = "none";
             const screenWidth = window.innerWidth;
             if(screenWidth <= 768){
                 document.querySelector(".mobile").style.display = "block";
@@ -44,11 +49,13 @@ import NavAdmin from '@/components/NavAdmin.vue';
     </div>
 
 <div class="desktop">
-    <div class="cartes ajout">
-        <table class="col-center">
+    <div class="cartes ajout col-center">
+        <div class="center">
+        <table>
             <thead>
                 <tr>
                     <th>Collecteur: </th>
+                    <th>Client: </th>
                     <th>Lieu: </th>
                     <th>Date: </th>
                     <th>Heure: </th>
@@ -57,7 +64,8 @@ import NavAdmin from '@/components/NavAdmin.vue';
             </thead>
             <tbody>
                     <tr>
-                        <td><input type="text" placeholder="quelqu'un"></td>
+                        <td><input type="text" placeholder="Collecteur"></td>
+                        <td><input type="text" placeholder="Client"></td>
                         <td><input type="text" placeholder="Paris"></td>
                         <td><input type="Date"></td>
                         <td><input type="time"></td>
@@ -65,13 +73,16 @@ import NavAdmin from '@/components/NavAdmin.vue';
                     </tr>
             </tbody>
         </table>
+        </div>
     </div>
 
-    <div class="cartes">
-        <table class="col-center">
+    <div class="cartes col-center">
+        <div class="center">
+        <table class="">
             <thead>
                 <tr>
                     <th>Collecteur: </th>
+                    <th>Client: </th>
                     <th>Lieu: </th>
                     <th>Date: </th>
                     <th>Heure: </th>
@@ -82,6 +93,7 @@ import NavAdmin from '@/components/NavAdmin.vue';
             <tbody>
                     <tr>
                         <td>quelqu'un</td>
+                        <td>quelqu'un</td>
                         <td>Paris</td>
                         <td>Date</td>
                         <td>time</td>
@@ -90,6 +102,7 @@ import NavAdmin from '@/components/NavAdmin.vue';
                     </tr>
                     <tr>
                         <td>Moi</td>
+                        <td>Client</td>
                         <td>Paris</td>
                         <td>Date</td>
                         <td>12h</td>
@@ -98,14 +111,16 @@ import NavAdmin from '@/components/NavAdmin.vue';
                     </tr>
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 
-<div class=" mobile">
-    <div class="cartes ajout">
+<div class="mobile">
+    <div class="cartes ajout-mobile">
         <table class="col-center">
             <tbody>
-                    <tr><th>Collecteur: <input type="text" placeholder="quelqu'un"></th></tr>
+                    <tr><th>Collecteur: <input type="text" placeholder="Collecteur"></th></tr>
+                    <tr><th>Client: <input type="text" placeholder="Client"></th></tr>
                     <tr><th>Lieu: <input type="text" placeholder="Paris"></th></tr>
                     <tr><th>Date: <input type="Date"></th></tr>
                     <tr><th>Heure: <input type="time"></th></tr>
@@ -117,6 +132,7 @@ import NavAdmin from '@/components/NavAdmin.vue';
         <table class="col-center">
             <tbody>
                     <tr><th>Collecteur: Axel</th></tr>
+                    <tr><th>Client: Axel</th></tr>
                     <tr><th>Lieu: Paris</th></tr>
                     <tr><th>Date: 26/12/2026</th></tr>
                     <tr><th>Heure: 16h</th></tr>
@@ -127,6 +143,7 @@ import NavAdmin from '@/components/NavAdmin.vue';
         <table class="col-center">
             <tbody>
                     <tr><th>Collecteur: X</th></tr>
+                    <tr><th>Client: Pikachu</th></tr>
                     <tr><th>Lieu: Dinard</th></tr>
                     <tr><th>Date: 26/12/2026</th></tr>
                     <tr><th>Heure: 16h</th></tr>

@@ -50,9 +50,10 @@ export default{
             <button class="switch" @click="valorisation">Valorisation</button>
     </div>
 
-    <div class="reception  top50">
+    <div class="reception col-center top50">
       <h3 class="center">reception</h3>
-      <table class="col-center">
+      <div class="center">
+      <table>
           <thead>
               <tr>
                   <th>Lieu</th>
@@ -73,6 +74,7 @@ export default{
               </tr>
           </tbody>
       </table>
+      </div>
     </div>
 
     <div class="valorisation  top50">

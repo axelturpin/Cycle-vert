@@ -5,8 +5,22 @@ import NavAdmin from '@/components/NavAdmin.vue';
 export default{
   data(){
     return {
-
+      divAjout: null,
     }
+  },
+  methods:{
+    ajoutClient(){
+      if(this.divAjout.style.display === "block"){
+        this.divAjout.style.display = "none"
+      }
+      else{
+        this.divAjout.style.display = "block";
+      }
+    }
+  },
+  mounted(){
+    this.divAjout = document.querySelector(".ajout-client");
+    this.divAjout.style.display = "none";
   }
 }
 </script>
@@ -16,21 +30,28 @@ export default{
 
    <h2 class="top50 center">Notifications</h2> 
     <div class="col-center dashboard top50">
-        <button class="btn">Ajouter utilisateur</button>
+        <button class="btn" @click="ajoutClient">Afficher Ajout utilisateur</button>
+
+        <div class="ajout-client">
+          <table>
+                <thead>
+                    <tr><th>Identifiant: <input type="text"></th></tr>
+                    <tr><th>Mot de passe: <input type="text"></th></tr>
+                    <tr><th><div class="col-center">Lieux et autres informations<textarea name="" id=""></textarea></div></th></tr>
+                </thead>
+            </table>
+            <div class="center">
+              <button class="btn" @click="ajout">Ajout utilisateur</button>
+            </div>
+        </div>
+
         <div class="clients">
             <table>
                 <thead>
-                    <tr>
-                        <th>Identifiant</th>
-                        <th>Mot de passe</th>
-                    </tr>
+                    <tr><th>Identifiant: Lorem, ipsum dolor.</th></tr>
+                    <tr><th>Mot de passe: Axel</th></tr>
+                    <tr><th><div class="col-center">Lieux et autres informations<textarea name="" id="">Paris, Dinard</textarea></div></th></tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Lorem, ipsum dolor.</td>
-                        <td>Axel</td>
-                    </tr>
-                </tbody>
             </table>
         </div>
     </div>

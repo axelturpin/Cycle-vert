@@ -41,7 +41,7 @@ export default{
                 </thead>
             </table>
             <div class="center">
-              <button class="btn" @click="ajout">Ajout utilisateur</button>
+              <button class="btn" @click="ajout" style="margin-bottom: 40px;">Ajout utilisateur</button>
             </div>
         </div>
 
@@ -50,7 +50,15 @@ export default{
                 <thead>
                     <tr><th>Identifiant: Lorem, ipsum dolor.</th></tr>
                     <tr><th>Mot de passe: Axel</th></tr>
-                    <tr><th><div class="col-center">Lieux et autres informations<textarea name="" id="">Paris, Dinard</textarea></div></th></tr>
+                    <tr><th><div class="col-center">Lieux et autres informations<textarea class="infos">Paris, Dinard</textarea></div></th></tr>
+                    <tr><th><button class="btn">Sauvegarder</button></th></tr>
+                    <tr><th><div class="col-center">Message a envoyer: <textarea class="msg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim eius rerum ea! Vero odit et vitae voluptatum provident non recusandae temporibus fugit quas eius commodi repellat, molestiae aperiam hic quos.</textarea></div></th></tr>
+                    <tr><th><div class="col-center">Photo à envoyé: 
+                      <input type="file"
+                            name="photo" 
+                            accept="image/png, image/jpeg, image/gif, image/webp">
+                    </div></th></tr>
+                    <tr><th><button class="btn">Envoyer</button></th></tr>
                 </thead>
             </table>
         </div>
@@ -60,6 +68,17 @@ export default{
 </template>
 
 <style scoped>
+
+.infos{
+  width: 40vw;
+  height: 80px;
+}
+
+.msg{
+  width: 50vw;
+  height: 100px;
+}
+
     .notification{
         background-color: #F3E5AB;
         width: 180px;

@@ -65,15 +65,14 @@
             <div class="center">Suivi compost</div>
         </div>
         <div class="col-center menu-stats">
-            <div class="center">Stats clients</div>
-            <div class="center">Stats biodechets</div>
-            <div class="center">Stats compost</div>
-            <div class="center">Stats collecte</div>
+            <router-link to="/stats-clients" class="center none">Stats clients</router-link>
+            <router-link to="/stats-biodechets" class="center none">Stats biodechets</router-link>
+            <router-link to="/stats-compost" class="center none">Stats compost</router-link>
+            <router-link to="/stats-collecte" class="center none">Stats collecte</router-link>
         </div>
         <div class="col-center menu-utilisateurs">
             <div class="center">Gestion collecteurs</div>
             <div class="center">Gestion valorisateurs</div>
-            <div class="center">Gestion clients</div>
             <router-link to="/gestion-clients" class="center none">Gestion clients</router-link>
         </div>
     </div>
@@ -121,6 +120,7 @@
         position: absolute;
         /* top: calc(92px); */
         border-radius: 0px 0px 20px 20px;
+        z-index: 2;
     }
 
     .menu-organisation{

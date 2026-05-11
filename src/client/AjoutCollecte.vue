@@ -15,7 +15,7 @@ export default{
     },
     methods:{
         local(){
-            this.collectes = JSON.parse(localStorage.getItem("Collectes")) || [];
+            let storage = JSON.parse(localStorage.getItem("Collectes")) || [];
             this.collectes = Array.isArray(storage) ? storage : [];
             let collecte = {data: this.date, heure: this.heure};
             this.collectes.push(collecte);

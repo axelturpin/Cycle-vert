@@ -2,13 +2,25 @@
 export default{
     data(){
         return{
-            Accueiltemp: '/accueil-client'
+            Accueiltemp: '/accueil-client',
+            collectes: [],
+            date: "",
+            heure: ""
         }
     },
     provide() {
       return {
-        Accueiltemp: this.Accueiltemp
+        Accueiltemp: this.Accueiltemp,
       }
+    },
+    methods:{
+        local(){
+            this.collectes = JSON.parse(localStorage.getItem("Collectes")) || [];
+            this.collectes = Array.isArray(storage) ? storage : [];
+            let collecte = {data: this.date, heure: this.heure};
+            this.collectes.push(collecte);
+            localStorage.setItem("Collectes", JSON.stringify(this.collectes));
+        }
     }
 }</script>
 
@@ -29,14 +41,14 @@ export default{
         <form action="">
             <div class="col-center">
                 <label for="date" class="col-center">Date</label>
-                <div><input type="date" name="" id="date"></div>
+                <div><input type="date" name="" id="date" v-model="date"></div>
             </div>
             <div class="col-center">
                 <label for="time" class="col-center">Heure</label>
-                <div><input type="time" name="" id="time"></div>
+                <div><input type="time" name="" id="time" v-model="heure"></div>
             </div>
 
-            <button type="submit" class="big-btn">Ajout</button>
+            <button type="submit" class="big-btn" @click="local">Ajout</button>
         </form>
 
         </div>

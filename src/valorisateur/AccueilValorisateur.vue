@@ -96,7 +96,7 @@ export default{
                     </th></tr>
                     <tr><th><button class="btn">Enregistrer analyses</button></th></tr>
                     <tr><th><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check"></th></tr>
-                    <tr><th><label for="check2">Higiénisation: </label><input type="checkbox" v-model="check2" id="check2"></th></tr>
+                    <!-- <tr><th><label for="check2">Higiénisation: </label><input type="checkbox" v-model="check2" id="check2"></th></tr> -->
                     <tr><th><label for="température">températue en °C: </label><input class="températue" type="number" id="température"></th></tr>
                     <tr><th><div class="center"><button class="btn">Historique de l'andain</button></div></th></tr>
                     <tr><th>Date relevé à faire: {{ "aujourd'hui" }}</th></tr>
@@ -107,6 +107,7 @@ export default{
 
             </tbody>
         </table>
+    </div>
     </div>
       <!-- <table class="col-center top50">
           <thead>
@@ -138,7 +139,7 @@ export default{
               </tr>
           </tbody>
       </table> -->
-    </div>
+    
 
 </template>
 

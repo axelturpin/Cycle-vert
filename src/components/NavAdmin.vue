@@ -61,8 +61,8 @@
     <div class="menus top90">
         <div class="col-center menu-organisation">
             <router-link to="/gestion-tournees" class="center none">Gestion tournées</router-link>
-            <div class="center">Suivi collecte</div>
-            <div class="center">Suivi compost</div>
+            <router-link to="/suivi-collecte" class="center none">Suivi collecte</router-link>
+            <router-link to="/suivi-compost" class="center none">Suivi compost</router-link>
         </div>
         <div class="col-center menu-stats">
             <router-link to="/stats-clients" class="center none">Stats clients</router-link>
@@ -71,8 +71,8 @@
             <router-link to="/stats-collecte" class="center none">Stats collecte</router-link>
         </div>
         <div class="col-center menu-utilisateurs">
-            <div class="center">Gestion collecteurs</div>
-            <div class="center">Gestion valorisateurs</div>
+            <router-link to="/gestion-clients" class="center none">Gestion collecteurs</router-link>
+            <router-link to="/gestion-clients" class="center none">Gestion valorisateurs</router-link>
             <router-link to="/gestion-clients" class="center none">Gestion clients</router-link>
         </div>
     </div>

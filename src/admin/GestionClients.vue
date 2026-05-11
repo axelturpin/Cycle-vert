@@ -28,7 +28,7 @@ export default{
 <template>
     <NavAdmin></NavAdmin>
 
-   <h2 class="top50 center">Notifications</h2> 
+   <h2 class="top50 center">Gestion clients</h2> 
     <div class="col-center dashboard top50">
         <button class="btn" @click="ajoutClient">Afficher Ajout utilisateur</button>
 
@@ -37,6 +37,7 @@ export default{
                 <thead>
                     <tr><th>Identifiant: <input type="text"></th></tr>
                     <tr><th>Mot de passe: <input type="text"></th></tr>
+                    <tr><th>Role: <input type="text"></th></tr>
                     <tr><th><div class="col-center">Lieux et autres informations<textarea name="" id=""></textarea></div></th></tr>
                 </thead>
             </table>
@@ -50,6 +51,7 @@ export default{
                 <thead>
                     <tr><th>Identifiant: Lorem, ipsum dolor.</th></tr>
                     <tr><th>Mot de passe: Axel</th></tr>
+                    <tr><th>Role: Pokemon</th></tr>
                     <tr><th><div class="col-center">Lieux et autres informations<textarea class="infos">Paris, Dinard</textarea></div></th></tr>
                     <tr><th><button class="btn">Sauvegarder</button></th></tr>
                     <tr><th><div class="col-center">Message a envoyer: <textarea class="msg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim eius rerum ea! Vero odit et vitae voluptatum provident non recusandae temporibus fugit quas eius commodi repellat, molestiae aperiam hic quos.</textarea></div></th></tr>

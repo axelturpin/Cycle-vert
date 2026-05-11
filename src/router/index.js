@@ -6,6 +6,8 @@ import StatsBiodechets from "@/admin/StatsBiodechets.vue";
 import StatsClients from "@/admin/StatsClients.vue";
 import StatsCollecte from "@/admin/StatsCollecte.vue";
 import StatsCompost from "@/admin/StatsCompost.vue";
+import SuiviCollecte from "@/admin/SuiviCollecte.vue";
+import SuiviCompost from "@/admin/SuiviCompost.vue";
 import App from "@/App.vue";
 import AccueilClient from "@/client/AccueilClient.vue";
 import AjoutCollecte from "@/client/AjoutCollecte.vue";
@@ -101,6 +103,16 @@ const roads = [
         path: "/stats-clients",
         name: "StatsClients",
         component: StatsClients,
+    },
+    {
+        path: "/suivi-collecte",
+        name: "SuiviCollecte",
+        component: SuiviCollecte,
+    },
+    {
+        path: "/suivi-compost",
+        name: "SuiviCompost",
+        component: SuiviCompost,
     },
 ]
 

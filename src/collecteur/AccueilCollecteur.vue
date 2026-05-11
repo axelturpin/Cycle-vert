@@ -4,6 +4,7 @@ export default{
     return {
       planingTemplate: null,
       itinéraireTemplate: null,
+      informerTemplate: null,
       Accueiltemp: "/accueil-collecteur",
       restant: 0,
       fait: 0,
@@ -15,12 +16,21 @@ export default{
     planing(){
         this.planingTemplate.style.display = "block";
         this.itinéraireTemplate.style.display = "none";
+        this.informerTemplate.style.display = "none";
         const menu = document.querySelector(".menu-collecteur");
         menu.style.display = "none";
     },
     itinéraire(){
         this.planingTemplate.style.display = "none";
         this.itinéraireTemplate.style.display = "block";
+        this.informerTemplate.style.display = "none";
+        const menu = document.querySelector(".menu-collecteur");
+        menu.style.display = "none";
+    },
+    informer(){
+        this.planingTemplate.style.display = "none";
+        this.itinéraireTemplate.style.display = "none";
+        this.informerTemplate.style.display = "block";
         const menu = document.querySelector(".menu-collecteur");
         menu.style.display = "none";
     },
@@ -50,6 +60,7 @@ export default{
   mounted(){
     this.planingTemplate = document.querySelector(".planing");
     this.itinéraireTemplate = document.querySelector(".itinéraire");
+    this.informerTemplate = document.querySelector(".informer");
     this.planing();
     this.tournée();
   },
@@ -85,8 +96,8 @@ export default{
     <div class="center top50 menu-collecteur">
         <div @click="planing" class="center">collectes</div>
         <div @click="itinéraire" class="center">Itinéraire</div>
-        <div class="center">Suivi anomalies</div>
-        <div class="center">Informer</div>
+        <!-- <div class="center">Suivi anomalies</div> -->
+        <div @click="informer" class="center">Informer</div>
     </div>
 
     <div class="planing top50">
@@ -125,6 +136,19 @@ export default{
             <button class="btn">Cloturer tournée</button>
         </div>
       </div>
+
+      <div class="center informer">
+        <h2 class="top50 center">Informer</h2> 
+            <div class="center">
+                <tr><th><div class="col-center">Message a envoyer: <textarea class="msg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim eius rerum ea! Vero odit et vitae voluptatum provident non recusandae temporibus fugit quas eius commodi repellat, molestiae aperiam hic quos.</textarea></div></th></tr>
+                <tr><th><div class="col-center">Photo à envoyé: 
+                    <input type="file"
+                    name="photo" 
+                    accept="image/png, image/jpeg, image/gif, image/webp">
+                </div></th></tr>
+                <tr><th><button class="btn">Envoyer</button></th></tr>
+            </div>
+        </div>
       <!-- <table class="col-center top50">
           <thead>
               <tr>

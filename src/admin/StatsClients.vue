@@ -8,7 +8,8 @@ import NavAdmin from '@/components/NavAdmin.vue';
 
 
     <div class="resumer col-center top50">
-        <input type="text" placeholder="client">
+        <label for="client">Nom du client</label>
+        <input type="text" placeholder="client" id="client">
         <button class="btn">Afficher stats</button>
         <h3>Stats collecte de Pikachu</h3>
         <p>DAC</p>

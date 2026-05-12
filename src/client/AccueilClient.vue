@@ -4,7 +4,8 @@ export default{
     return {
       planingTemplate: null,
       historiqueTemplate: null,
-      Accueiltemp: '/accueil-client'
+      Accueiltemp: '/accueil-client',
+      collectes: []
     }
   },
   methods:{
@@ -15,12 +16,24 @@ export default{
     historique(){
       this.planingTemplate.style.display = "none";
       this.historiqueTemplate.style.display = "block";
+    },
+    toLocaleDateString2(date) {
+      // const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      // return new Date(date).toLocaleDateString('fr-FR', options);
+      const tempDate = new Date(date);
+      const newDate = tempDate.setDate(tempDate.getDate());
+      console.log(newDate);
+      return new Date(newDate).toLocaleDateString();
+      
     }
   },
   mounted(){
     this.planingTemplate = document.querySelector(".planing");
     this.historiqueTemplate = document.querySelector(".historique");
     this.planing();
+    const storage = JSON.parse(localStorage.getItem("Collectes")) || [];
+    this.collectes = Array.isArray(storage) ? storage : [];
+    console.log(this.collectes);
   },
   // props:["Accueil"],
     provide() {
@@ -69,10 +82,10 @@ export default{
                   <td>12h00</td>
                   <td><button class="btn">Annuler</button></td>
               </tr>
-              <tr>
-                  <td>Dinard</td>
-                  <td>26/12/2026</td>
-                  <td>15h15</td>
+              <tr v-for="(collecte, index) in collectes" :key="index">
+                  <td>{{ collecte.lieu }}</td>
+                  <td>{{ toLocaleDateString(collecte.date) }}</td>
+                  <td>{{ collecte.heure }}</td>
                   <td><button class="btn">Annuler</button></td>
               </tr>
           </tbody>

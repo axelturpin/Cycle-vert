@@ -30,6 +30,10 @@ export default{
         <h2>Ajout Andain</h2>
         <form action="">
             <div class="col-center">
+                <label for="lieu" class="col-center">Lieu</label>
+                <div><input type="text" name="" id="text" v-model="lieu"></div>
+            </div>
+            <div class="col-center">
                 <label for="date" class="col-center">Date</label>
                 <div><input type="date" name="" id="date"></div>
             </div>

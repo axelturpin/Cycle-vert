@@ -95,13 +95,15 @@ export default{
                     Temps restant: 12 semaines
                     </th></tr>
                     <tr><th><button class="btn">Enregistrer analyses</button></th></tr>
-                    <tr><th><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check"></th></tr>
+                    <tr><th class="center"><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check" class="checkbox"></th></tr>
                     <!-- <tr><th><label for="check2">Higiénisation: </label><input type="checkbox" v-model="check2" id="check2"></th></tr> -->
                     <tr><th><label for="température">températue en °C: </label><input class="températue" type="number" id="température"></th></tr>
                     <tr><th><div class="center"><button class="btn">Historique de l'andain</button></div></th></tr>
                     <tr><th>Date relevé à faire: {{ "aujourd'hui" }}</th></tr>
 
-                    <tr><th>compteur 55°C / 7 jours</th></tr>
+                    <tr><th>compteur 55°C / 7 jours: <br>
+                            relevé 1: <label for="date1">Date: </label><input class="date1" type="date" id="date1"> <input type="checkbox" class="checkbox">
+                    </th></tr>
                     <tr><th>contrôle 3 relevés / semaine</th></tr>
 
 
@@ -197,6 +199,11 @@ tfoot td {
 
 .bac{
     width: 30px;
+}
+
+.checkbox{
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 </style>

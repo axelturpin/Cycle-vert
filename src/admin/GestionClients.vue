@@ -81,13 +81,13 @@ export default{
   height: 100px;
 }
 
-    .notification{
-        background-color: #F3E5AB;
-        width: 180px;
-        height: auto;
-    }
+  .notification{
+      background-color: #F3E5AB;
+      width: 180px;
+      height: auto;
+  }
 
-    table {
+  table {
   border-collapse: collapse;
   background-color: #F3E5AB;
 }

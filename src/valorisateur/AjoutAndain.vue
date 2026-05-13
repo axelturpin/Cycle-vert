@@ -2,7 +2,24 @@
 export default{
     data(){
         return{
-            Accueiltemp: '/accueil-valorisateur'
+            Accueiltemp: '/accueil-valorisateur',
+            receptions: [],
+            date: "",
+            heure: "",
+            lieu: ""
+        }
+    },
+    methods:{
+        local2(){
+            let storage = JSON.parse(localStorage.getItem("receptions")) || [];
+            this.receptions = Array.isArray(storage) ? storage : [];
+            let reception = {lieu: this.lieu, date: this.date, heure: this.heure};
+            this.receptions.push(reception);
+            localStorage.setItem("receptions", JSON.stringify(this.receptions));
+            console.log(this.receptions)
+            this.lieu = "";
+            this.date = "";
+            this.heure = "";
         }
     },
     provide() {
@@ -28,18 +45,18 @@ export default{
 
         <div class="col-center top50 block">
         <h2>Ajout Andain</h2>
-        <form action="">
+        <form @submit.prevent="local2">
             <div class="col-center">
                 <label for="lieu" class="col-center">Lieu</label>
                 <div><input type="text" name="" id="text" v-model="lieu"></div>
             </div>
             <div class="col-center">
                 <label for="date" class="col-center">Date</label>
-                <div><input type="date" name="" id="date"></div>
+                <div><input type="date" name="" id="date" v-model="date"></div>
             </div>
             <div class="col-center">
                 <label for="time" class="col-center">Heure</label>
-                <div><input type="time" name="" id="time"></div>
+                <div><input type="time" name="" id="time" v-model="heure"></div>
             </div>
 
             <button type="submit" class="big-btn">Ajout</button>

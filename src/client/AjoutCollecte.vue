@@ -19,7 +19,7 @@ export default{
         local(){
             let storage = JSON.parse(localStorage.getItem("Collectes")) || [];
             this.collectes = Array.isArray(storage) ? storage : [];
-            let collecte = {lieu: this.lieu, date: String(this.date), heure: this.heure};
+            let collecte = {lieu: this.lieu, date: this.date, heure: this.heure};
             this.collectes.push(collecte);
             localStorage.setItem("Collectes", JSON.stringify(this.collectes));
             this.lieu = "";

@@ -5,7 +5,12 @@ export default{
       planingTemplate: null,
       historiqueTemplate: null,
       Accueiltemp: '/accueil-client',
-      collectes: []
+      collectes: [],
+      consignes: null,
+      affichage: false,
+      lieu: "0",
+      date: "0",
+      heure: "0",
     }
   },
   methods:{
@@ -17,14 +22,23 @@ export default{
       this.planingTemplate.style.display = "none";
       this.historiqueTemplate.style.display = "block";
     },
-    toLocaleDateString2(date) {
-      // const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-      // return new Date(date).toLocaleDateString('fr-FR', options);
+    toLocaleDateString(date) {
       const tempDate = new Date(date);
-      const newDate = tempDate.setDate(tempDate.getDate());
-      console.log(newDate);
-      return new Date(newDate).toLocaleDateString();
-      
+      if(Number.isNaN(tempDate.getTime())){
+        return ("date NaN")
+      }
+        return tempDate.toLocaleDateString('fr-FR');
+    },
+    annuler(index){
+        // A revoir
+        let storage = JSON.parse(localStorage.getItem("Collectes")) || [];
+        this.collectes = Array.isArray(storage) ? storage : [];
+        console.log(storage);
+        this.collectes = this.collectes.filter((e, key) => {
+            return (key !== index)
+        });
+        console.log(this.collectes);
+        localStorage.setItem("Collectes", JSON.stringify(this.collectes));
     }
   },
   mounted(){
@@ -34,6 +48,9 @@ export default{
     const storage = JSON.parse(localStorage.getItem("Collectes")) || [];
     this.collectes = Array.isArray(storage) ? storage : [];
     console.log(this.collectes);
+    
+    // localStorage.setItem("consignes", "consignes temp test");
+    this.consignes = localStorage.getItem("consignes");
   },
   // props:["Accueil"],
     provide() {
@@ -86,7 +103,7 @@ export default{
                   <td>{{ collecte.lieu }}</td>
                   <td>{{ toLocaleDateString(collecte.date) }}</td>
                   <td>{{ collecte.heure }}</td>
-                  <td><button class="btn">Annuler</button></td>
+                  <td><button class="btn" @click="annuler(index)">Annuler</button></td>
               </tr>
           </tbody>
       </table>
@@ -122,8 +139,11 @@ export default{
 
 <div class="center">
   <!-- <button class="btn top50">DAC</button>  a recevoir-->
-  <button class="btn top50">Consignes de tri</button>
+  <button class="btn top50" @click="affichage = !affichage">Consignes de tri</button>
   <button class="btn top50">Bilan annuel</button>
+</div>
+<div class="center top50" v-if="affichage">
+  <p>{{ consignes }}</p>
 </div>
 
 </template>

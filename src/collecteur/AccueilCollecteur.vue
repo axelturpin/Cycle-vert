@@ -6,10 +6,11 @@ export default{
       itinéraireTemplate: null,
       informerTemplate: null,
       Accueiltemp: "/accueil-collecteur",
+      collectes: [],
       restant: 0,
       fait: 0,
-      check1: false,
-      check2: false,
+    //   check1: false,
+    //   check2: false,
     }
   },
   methods:{
@@ -42,27 +43,46 @@ export default{
             menu.style.display = "block";
         }
     },
-    tournée(){
-        this.restant = 0;
-        this.fait = 0;
-        if(this.check1){
+    // tournée(){
+    //     this.restant = 0;
+    //     this.fait = 0;
+    //     if(this.check1){
+    //         this.fait++;
+    //     }else{
+    //         this.restant++;
+    //     }
+    //     if(this.check2){
+    //         this.fait++;
+    //     }else{
+    //         this.restant++;
+    //     }
+    //     console.log(this.fait);
+    // },
+    click1(index){
+        if(confirm("Voulez-vous masquer cette collecte pour vous ?")){
             this.fait++;
-        }else{
-            this.restant++;
+            this.restant--;
+
         }
-        if(this.check2){
-            this.fait++;
-        }else{
-            this.restant++;
+    },
+    toLocaleDateString(date) {
+        const tempDate = new Date(date);
+        if(Number.isNaN(tempDate.getTime())){
+            return ("date NaN")
         }
-    }
+            return tempDate.toLocaleDateString('fr-FR');
+    },
   },
   mounted(){
     this.planingTemplate = document.querySelector(".planing");
     this.itinéraireTemplate = document.querySelector(".itinéraire");
     this.informerTemplate = document.querySelector(".informer");
     this.planing();
-    this.tournée();
+    this.restant = JSON.parse(localStorage.getItem("Collectes-restantes")).length;
+    this.fait = JSON.parse(localStorage.getItem("Collectes")).length - this.restant;
+    // localStorage.setItem("Collectes-restantes", localStorage.getItem("Collectes"));
+    const storage = JSON.parse(localStorage.getItem("Collectes-restantes")) || [];
+    this.collectes = Array.isArray(storage) ? storage : [];
   },
   // props:["Accueil"]
       provide() {
@@ -71,7 +91,8 @@ export default{
       }
     },
     computed(){
-
+        this.restant;
+        this.fait;
     }
 }
 </script>
@@ -90,8 +111,8 @@ export default{
         <button class="center top50 big-btn" @click="switch2">Menu</button>
     </div>
     
-    <p class="center top50">Nombre de points collectés: {{ restant }}</p>
-    <p class="center top50">Nombre de points non collectés: {{ fait }}</p>
+    <p class="center top50">Nombre de points collectés: {{ fait }}</p>
+    <p class="center top50">Nombre de points non collectés: {{ restant }}</p>
 
     <div class="center top50 menu-collecteur">
         <div @click="planing" class="center">collectes</div>
@@ -103,43 +124,33 @@ export default{
     <div class="planing top50">
       <h3 class="center">Collectes</h3>
       <div class="cartes">
+    <div v-for="(collecte, index) in collectes" :key="index">
         <table class="col-center">
             <tbody>
-                    <tr><th>Lieu: Paris</th></tr>
-                    <tr><th>Date: 12/12/1212</th></tr>
-                    <tr><th>Heure: 13h03</th></tr>
+                    <tr><th>Lieu: {{ collecte.lieu }}</th></tr>
+                    <tr><th>Date: {{ toLocaleDateString(collecte.date) }}</th></tr>
+                    <tr><th>Heure: {{ collecte.heure }}</th></tr>
                     <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs"></label></th></tr>
-                    <tr><th><label for="échange1:1">échange1:1 <input type="checkbox" id="échange1:1"></label></th></tr>
+                    <tr><th><div class="center"><label for="échange1:1">échange1:1 </label><input type="checkbox" id="échange1:1" class="checkbox"></div></th></tr>
                     <tr><th><label for="température">températue: <input class="bac" type="number" id="température"></label></th></tr>
                     <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids"></th></tr>
-                    <tr><th><div class="center"><button class="btn">Anomalie</button></div></th></tr>
-                    <tr><th><label for="check">Valider: <input type="checkbox" v-model="check1" id="check"></label></th></tr>
+                    <tr><th><div class="center"><button class="btn" @click="informer">Anomalie</button></div></th></tr>
+                    <tr><th><div class="center"><button @click="click1(index)" class="btn">Valider</button></div></th></tr>
             </tbody>
-        </table>
-        <table class="col-center">
-            <tbody>
-                    <tr><th>Lieu: Paris</th></tr>
-                    <tr><th>Date: 12/12/1212</th></tr>
-                    <tr><th>Heure: 13h03</th></tr>
-                    <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs"></label></th></tr>
-                    <tr><th><label for="échange1:1">échange1:1 <input type="checkbox" id="échange1:1"></label></th></tr>
-                    <tr><th><label for="température">températue: <input class="bac" type="number" id="température"></label></th></tr>
-                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids"></th></tr>
-                    <tr><th><div class="center"><button class="btn">Anomalie</button></div></th></tr>
-                    <tr><th><label for="check">Valider: <input type="checkbox" v-model="check1" id="check"></label></th></tr>
-            </tbody>
-        </table>
+        </table>  
+    </div>
 
-        <div class="center">Nombre de points collectés: 1</div>
-        <div class="center">Nombre de points non collectés: 1</div>
         <div class="col-center">
             <button class="btn">Cloturer tournée</button>
         </div>
       </div>
+      </div>
 
-      <div class="center informer">
-        <h2 class="top50 center">Informer</h2> 
-            <div class="center">
+      <div class="col-center informer top50">
+        <h2 class="col-center gap">Informer</h2> 
+            <div class="col-center">
+                <table><tbody>
+                    <tr><th><div class="col-center">Lieu: <input type="text"></div></th></tr>
                 <tr><th><div class="col-center">Message a envoyer: <textarea class="msg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim eius rerum ea! Vero odit et vitae voluptatum provident non recusandae temporibus fugit quas eius commodi repellat, molestiae aperiam hic quos.</textarea></div></th></tr>
                 <tr><th><div class="col-center">Photo à envoyé: 
                     <input type="file"
@@ -147,39 +158,12 @@ export default{
                     accept="image/png, image/jpeg, image/gif, image/webp">
                 </div></th></tr>
                 <tr><th><button class="btn">Envoyer</button></th></tr>
+                </tbody></table>
             </div>
         </div>
-      <!-- <table class="col-center top50">
-          <thead>
-              <tr>
-                  <th>Lieu</th>
-                  <th>Date</th>
-                  <th>Heure</th>
-                  <th>Valider</th>
-                  <th>nb bac</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>Paris</td>
-                  <td>26/05/2026</td>
-                  <td>12h01</td>
-                  <td><input type="checkbox" v-model="check1" @change="tournée"></td>
-                  <td><input class="bac" type="number"></td>
-              </tr>
-              <tr>
-                  <td>Dinard</td>
-                  <td>26/12/2026</td>
-                  <td>15h15</td>
-                  <td><input type="checkbox" v-model="check2" @change="tournée"></td>
-                  <td><input class="bac" type="number"></td>
-              </tr>
-          </tbody>
-      </table> -->
-    </div>
 
-    <div class="itinéraire">
-      <h3 class="center top50">itinéraire</h3>
+    <div class="itinéraire top50">
+      <h3 class="center">itinéraire</h3>
     </div>
 
 </template>
@@ -241,7 +225,7 @@ tfoot td {
         background-color: #A3B18A;
         position: absolute;
         transform: translateX(-50%) translateY(-50%);
-        top: calc(92px + 210px);
+        top: calc(92px + 186px);
         left: 50vw;
         border-radius: 0px 0px 20px 20px;
         z-index: 2;
@@ -270,6 +254,23 @@ tfoot td {
     
 .bac{
     width: 30px;
+}
+
+.informer{
+    min-width: 50vw;
+    min-height: 240px;
+    background-color: #F3E5AB;
+    font-size: 1.2rem;
+}
+
+textarea{
+    min-width: 30vw;
+    min-height: 120px;
+}
+
+.checkbox{
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 

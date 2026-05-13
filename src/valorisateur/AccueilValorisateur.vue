@@ -5,6 +5,7 @@ export default{
       receptionTemplate: null,
       valorisationTemplate: null,
       Accueiltemp: "/accueil-valorisateur",
+      receptions: null
     }
   },
   methods:{
@@ -15,12 +16,23 @@ export default{
     valorisation(){
       this.receptionTemplate.style.display = "none";
       this.valorisationTemplate.style.display = "block";
+    },
+    toLocaleDateString(date) {
+      const tempDate = new Date(date);
+      if(Number.isNaN(tempDate.getTime())){
+        return ("pas une date")
+      }
+        return tempDate.toLocaleDateString('fr-FR');
     }
   },
   mounted(){
     this.receptionTemplate = document.querySelector(".reception");
     this.valorisationTemplate = document.querySelector(".valorisation");
     this.reception();
+
+    const storage = JSON.parse(localStorage.getItem("receptions")) || [];
+    this.receptions = Array.isArray(storage) ? storage : [];
+    console.log(this.receptions);
   },
   props:["Accueil"],
         provide() {
@@ -62,15 +74,10 @@ export default{
               </tr>
           </thead>
           <tbody>
-              <tr>
-                  <td>Paris</td>
-                  <td>26/05/2026</td>
-                  <td>12h00</td>
-              </tr>
-              <tr>
-                  <td>Dinard</td>
-                  <td>26/12/2026</td>
-                  <td>15h15</td>
+              <tr v-for="(reception, index) in receptions" :key="index">
+                  <td>{{ reception.lieu }}</td>
+                  <td>{{ toLocaleDateString(reception.date) }}</td>
+                  <td>{{ reception.heure }}</td>
               </tr>
           </tbody>
       </table>
@@ -95,14 +102,14 @@ export default{
                     Temps restant: 12 semaines
                     </th></tr>
                     <tr><th><button class="btn">Enregistrer analyses</button></th></tr>
-                    <tr><th class="center"><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check" class="checkbox"></th></tr>
+                    <tr><th><div class="center"><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check" class="checkbox"></div></th></tr>
                     <!-- <tr><th><label for="check2">Higiénisation: </label><input type="checkbox" v-model="check2" id="check2"></th></tr> -->
                     <tr><th><label for="température">températue en °C: </label><input class="températue" type="number" id="température"></th></tr>
                     <tr><th><div class="center"><button class="btn">Historique de l'andain</button></div></th></tr>
                     <tr><th>Date relevé à faire: {{ "aujourd'hui" }}</th></tr>
 
                     <tr><th>compteur 55°C / 7 jours: <br>
-                            relevé 1: <label for="date1">Date: </label><input class="date1" type="date" id="date1"> <input type="checkbox" class="checkbox">
+                            <div class="center">relevé 1: <label for="date1">Date: </label><input class="date1" type="date" id="date1"> <input type="checkbox" class="checkbox"></div>
                     </th></tr>
                     <tr><th>contrôle 3 relevés / semaine</th></tr>
 

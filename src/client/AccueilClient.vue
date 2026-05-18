@@ -6,6 +6,7 @@ export default{
       historiqueTemplate: null,
       Accueiltemp: '/accueil-client',
       collectes: [],
+      historiqueList: [],
       consignes: null,
       affichage: false,
       lieu: "0",
@@ -30,7 +31,7 @@ export default{
         return tempDate.toLocaleDateString('fr-FR');
     },
     annuler(index){
-        // A revoir
+      if(confirm("Voulez-vous masquer cette collecte pour vous ?")){
         let storage = JSON.parse(localStorage.getItem("Collectes")) || [];
         this.collectes = Array.isArray(storage) ? storage : [];
         console.log(storage);
@@ -41,15 +42,22 @@ export default{
         localStorage.setItem("Collectes", JSON.stringify(this.collectes));
     }
   },
+},
   mounted(){
     this.planingTemplate = document.querySelector(".planing");
     this.historiqueTemplate = document.querySelector(".historique");
     this.planing();
     const storage = JSON.parse(localStorage.getItem("Collectes")) || [];
     this.collectes = Array.isArray(storage) ? storage : [];
+
+    const storage2 = JSON.parse(localStorage.getItem("Historique")) || [];
+    this.historiqueList = Array.isArray(storage2) ? storage2 : [];
     console.log(this.collectes);
     
+    // Lignes a retirer en prod
     // localStorage.setItem("consignes", "consignes temp test");
+    localStorage.setItem("Historique", localStorage.getItem("Collectes"));
+
     this.consignes = localStorage.getItem("consignes");
   },
   // props:["Accueil"],
@@ -93,12 +101,6 @@ export default{
               </tr>
           </thead>
           <tbody>
-              <tr>
-                  <td>Paris</td>
-                  <td>26/05/2026</td>
-                  <td>12h00</td>
-                  <td><button class="btn">Annuler</button></td>
-              </tr>
               <tr v-for="(collecte, index) in collectes" :key="index">
                   <td>{{ collecte.lieu }}</td>
                   <td>{{ toLocaleDateString(collecte.date) }}</td>
@@ -122,15 +124,10 @@ export default{
               </tr>
           </thead>
           <tbody>
-              <tr>
-                  <td>Paris</td>
-                  <td>26/05/2026</td>
-                  <td>12h00</td>
-              </tr>
-              <tr>
-                  <td>Dinard</td>
-                  <td>26/12/2026</td>
-                  <td>15h15</td>
+              <tr v-for="(h1, index) in historiqueList" :key="index">
+                  <td>{{ h1.lieu }}</td>
+                  <td>{{ toLocaleDateString(h1.date) }}</td>
+                  <td>{{ h1.heure }}</td>
               </tr>
           </tbody>
       </table>

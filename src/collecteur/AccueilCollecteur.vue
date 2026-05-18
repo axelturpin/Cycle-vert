@@ -2,13 +2,19 @@
 export default{
   data(){
     return {
-      planingTemplate: null,
-      itinéraireTemplate: null,
-      informerTemplate: null,
-      Accueiltemp: "/accueil-collecteur",
-      collectes: [],
-      restant: 0,
-      fait: 0,
+        planingTemplate: null,
+        itinéraireTemplate: null,
+        informerTemplate: null,
+        Accueiltemp: "/accueil-collecteur",
+        collectes: [],
+        historiqueCollecteur: [],
+        restant: 0,
+        fait: 0,
+        bac: [], 
+        echange: [], 
+        temperature: [], 
+        poids: [],
+        collecteur: "collecteur inconnu",
     //   check1: false,
     //   check2: false,
     }
@@ -58,11 +64,33 @@ export default{
     //     }
     //     console.log(this.fait);
     // },
-    click1(index){
+    valider(index, lieu, date, heure){
         if(confirm("Voulez-vous masquer cette collecte pour vous ?")){
+            let storage = JSON.parse(localStorage.getItem("historique-collecteur")) || [];
+            this.historiqueCollecteur = Array.isArray(storage) ? storage : [];
+            let collecte = {
+                collecteur: this.collecteur,
+                lieu: lieu, 
+                date: date, 
+                heure: heure, 
+                Andain: this.nom[index],
+                bac: this.bac[index], 
+                echange: this.echange[index], 
+                temperature: this.temperature[index], 
+                poids: this.poids[index],
+            };
+            this.historiqueCollecteur.push(collecte);
+            localStorage.setItem("historique-collecteur", JSON.stringify(this.historiqueCollecteur));
+            console.log(localStorage.getItem("historique-collecteur"));
+
             this.fait++;
             this.restant--;
-
+            storage = JSON.parse(localStorage.getItem("Collectes-restantes")) || [];
+            this.collectes = Array.isArray(storage) ? storage : [];
+            this.collectes = this.collectes.filter((e, key) => {
+                return (key !== index)
+            });
+            localStorage.setItem("Collectes-restantes", JSON.stringify(this.collectes));
         }
     },
     toLocaleDateString(date) {
@@ -80,7 +108,11 @@ export default{
     this.planing();
     this.restant = JSON.parse(localStorage.getItem("Collectes-restantes")).length;
     this.fait = JSON.parse(localStorage.getItem("Collectes")).length - this.restant;
-    // localStorage.setItem("Collectes-restantes", localStorage.getItem("Collectes"));
+    
+    // Lignes a retirer en prod
+    localStorage.setItem("Collectes-restantes", localStorage.getItem("Collectes"));
+    localStorage.setItem("historique-collecteur", localStorage.getItem("Collectes"));
+
     const storage = JSON.parse(localStorage.getItem("Collectes-restantes")) || [];
     this.collectes = Array.isArray(storage) ? storage : [];
   },
@@ -127,15 +159,16 @@ export default{
     <div v-for="(collecte, index) in collectes" :key="index">
         <table class="col-center">
             <tbody>
+                    <tr><th><label for="nom">Andain</label> <input type="text" v-model="nom[index]"></th></tr>
                     <tr><th>Lieu: {{ collecte.lieu }}</th></tr>
                     <tr><th>Date: {{ toLocaleDateString(collecte.date) }}</th></tr>
                     <tr><th>Heure: {{ collecte.heure }}</th></tr>
-                    <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs"></label></th></tr>
-                    <tr><th><div class="center"><label for="échange1:1">échange1:1 </label><input type="checkbox" id="échange1:1" class="checkbox"></div></th></tr>
-                    <tr><th><label for="température">températue: <input class="bac" type="number" id="température"></label></th></tr>
-                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids"></th></tr>
+                    <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs" v-model="bac[index]"></label></th></tr>
+                    <tr><th><div class="center"><label for="échange1:1">échange1:1 </label><input type="checkbox" id="échange1:1" class="checkbox" v-model="echange[index]"></div></th></tr>
+                    <tr><th><label for="température">températue: <input class="bac" type="number" id="température" v-model="temperature[index]"></label></th></tr>
+                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids" v-model="poids[index]"></th></tr>
                     <tr><th><div class="center"><button class="btn" @click="informer">Anomalie</button></div></th></tr>
-                    <tr><th><div class="center"><button @click="click1(index)" class="btn">Valider</button></div></th></tr>
+                    <tr><th><div class="center"><button @click="valider(index, collecte.lieu, toLocaleDateString(collecte.date), collecte.heure)" class="btn">Valider</button></div></th></tr>
             </tbody>
         </table>  
     </div>

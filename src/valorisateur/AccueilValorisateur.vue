@@ -5,7 +5,22 @@ export default{
       receptionTemplate: null,
       valorisationTemplate: null,
       Accueiltemp: "/accueil-valorisateur",
-      receptions: null
+      receptions: null,
+      valorisations: null,
+      val: null,
+      nom: null,
+      lieu: null,
+      date: null,
+      heure: null,
+      etape: null,
+      checkNFU: null,
+      temperature: null,
+      date1: null,
+      date2: null,
+      date3: null,
+      check1: null,
+      check2: null,
+      check3: null,
     }
   },
   methods:{
@@ -23,6 +38,27 @@ export default{
         return ("pas une date")
       }
         return tempDate.toLocaleDateString('fr-FR');
+    },
+    enregistrer(){
+      let storage = JSON.parse(localStorage.getItem("valorisation")) || [];
+      this.valorisations = Array.isArray(storage) ? storage : [];
+      this.val = {
+        andain: this.nom,
+        lieu: this.lieu,
+        date: this.date,
+        heure: this.heure,
+        etape: this.etape,
+        NFU: this.checkNFU,
+        temperature: this.temperature,
+        dateRelevé1: this.date1,
+        dateRelevé2: this.date2,
+        dateRelevé3: this.date3,
+        checkRelevé1: this.check1,
+        checkRelevé2: this.check2,
+        checkRelevé3: this.check3,
+      };
+      this.valorisations.push(this.val);
+      localStorage.setItem("valorisation", JSON.stringify(this.valorisations));
     }
   },
   mounted(){
@@ -89,11 +125,12 @@ export default{
       <div class="cartes">
         <table class="col-center">
             <tbody>
-                    <tr><th>Lieu: Paris</th></tr>
-                    <tr><th><label for="date">Date: </label><input class="date" type="date" id="date"></th></tr>
-                    <tr><th><label for="date">Heure: </label><input class="heure" type="time" id="heure"></th></tr>
+                    <tr><th><label for="nom">Andain: </label><input class="nom" type="text" id="nom" v-model="nom"></th></tr>
+                    <tr><th><label for="lieu">Lieu: </label><input class="lieu" type="text" id="lieu" v-model="lieu"></th></tr>
+                    <tr><th><label for="date">Date: </label><input class="date" type="date" id="date" v-model="date"></th></tr>
+                    <tr><th><label for="heure">Heure: </label><input class="heure" type="time" id="heure" v-model="heure"></th></tr>
                     <tr><th>étape: 
-                        <select name="" id="">
+                        <select name="" id="" v-model="etape">
                             <option value="Higiénisation">Higiénisation</option>
                             <option value="Fermentation">Fermentation</option>
                             <option value="Maturation">Maturation</option>
@@ -101,17 +138,19 @@ export default{
                         <br>
                     Temps restant: 12 semaines
                     </th></tr>
-                    <tr><th><button class="btn">Enregistrer analyses</button></th></tr>
-                    <tr><th><div class="center"><label for="check">Valider NFU: </label><input type="checkbox" v-model="check1" id="check" class="checkbox"></div></th></tr>
+                    <tr><th><div class="center"><label for="check">Valider NFU: </label><input type="checkbox" v-model="checkNFU" id="check" class="checkbox"></div></th></tr>
                     <!-- <tr><th><label for="check2">Higiénisation: </label><input type="checkbox" v-model="check2" id="check2"></th></tr> -->
-                    <tr><th><label for="température">températue en °C: </label><input class="températue" type="number" id="température"></th></tr>
-                    <tr><th><div class="center"><button class="btn">Historique de l'andain</button></div></th></tr>
+                    <tr><th><label for="température">températue en °C: </label><input class="températue" type="number" id="température" v-model="temperature"></th></tr>
                     <tr><th>Date relevé à faire: {{ "aujourd'hui" }}</th></tr>
-
+                    
                     <tr><th>compteur 55°C / 7 jours: <br>
-                            <div class="center">relevé 1: <label for="date1">Date: </label><input class="date1" type="date" id="date1"> <input type="checkbox" class="checkbox"></div>
+                      <div class="center">relevé 1: <label for="date1">Date: </label><input class="date" type="date" id="date1" v-model="date1"> <input type="checkbox" class="checkbox" v-model="check1"></div>
+                      <div class="center">relevé 2: <label for="date2">Date: </label><input class="date" type="date" id="date2" v-model="date2"> <input type="checkbox" class="checkbox" v-model="check2"></div>
+                      <div class="center">relevé 3: <label for="date3">Date: </label><input class="date" type="date" id="date3" v-model="date3"> <input type="checkbox" class="checkbox" v-model="check3"></div>
                     </th></tr>
                     <tr><th>contrôle 3 relevés / semaine</th></tr>
+                    <tr><th><button class="btn" @click="enregistrer">Enregistrer analyses</button></th></tr>
+                    <tr><th><div class="center"><button class="btn">Historique de l'andain</button></div></th></tr>
 
 
             </tbody>

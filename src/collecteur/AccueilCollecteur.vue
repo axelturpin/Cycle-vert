@@ -10,6 +10,7 @@ export default{
         historiqueCollecteur: [],
         restant: 0,
         fait: 0,
+        // nom: [],
         bac: [], 
         echange: [], 
         temperature: [], 
@@ -159,7 +160,7 @@ export default{
     <div v-for="(collecte, index) in collectes" :key="index">
         <table class="col-center">
             <tbody>
-                    <tr><th><label for="nom">Andain</label> <input type="text" v-model="nom[index]"></th></tr>
+                    <!-- <tr><th><label for="nom">Andain</label> <input type="text" v-model="nom[index]"></th></tr> -->
                     <tr><th>Lieu: {{ collecte.lieu }}</th></tr>
                     <tr><th>Date: {{ toLocaleDateString(collecte.date) }}</th></tr>
                     <tr><th>Heure: {{ collecte.heure }}</th></tr>

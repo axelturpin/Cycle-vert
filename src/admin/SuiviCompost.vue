@@ -4,6 +4,10 @@ import NavAdmin from '@/components/NavAdmin.vue';
         data(){
             return{
                 collectes: [],
+                collecteur: [],
+                lieu: [],
+                date: [],
+                heure: [],
                 bac: [], 
                 echange: [], 
                 temperature: [], 
@@ -19,12 +23,37 @@ import NavAdmin from '@/components/NavAdmin.vue';
             }
                 return tempDate.toLocaleDateString('fr-FR');
             },
+            enregistrer(index){
+                // let inputCollecteur = document.querySelector(`.collecteur${index}`);
+                // let inputLieu = document.querySelector(`.lieu${index}`);
+                // let inputDate = document.querySelector(`.date${index}`);
+                // let inputHeure = document.querySelector(`.heure${index}`);
+                // let inputBac = document.querySelector(`.bac${index}`);
+                // let inputEchange = document.querySelector(`.echange${index}`);
+                // let inputTemperature = document.querySelector(`.temperature${index}`);
+                // let inputPoids = document.querySelector(`.poids${index}`);
+
+                this.collectes = this.collectes.map((collecte, i)=>{
+                    collecte.collecteur = this.collecteur[index];
+                    collecte.lieu = this.lieu[index];
+                    collecte.date = this.date[index];
+                    collecte.heure = this.heure[index];
+                    collecte.bac = this.toLocaleDateString(this.bac[index]);
+                    collecte.echange = this.echange[index];
+                    collecte.temperature = this.temperature[index];
+                    collecte.poids = this.poids[index];
+                    return(collecte);
+                })
+                localStorage.setItem("historique-collecteur", JSON.stringify(this.collectes));
+                console.log(this.collectes);
+            },
         },
         mounted(){
             let storage = JSON.parse(localStorage.getItem("historique-collecteur")) || [];
             this.collectes = Array.isArray(storage) ? storage : [];
             this.valorisations = JSON.parse(localStorage.getItem("valorisation"));
-            console.log(this.valorisations);
+            // console.log(this.valorisations);
+            console.log(this.collectes);
         },
         computed(){
             this.collectes;
@@ -40,7 +69,7 @@ import NavAdmin from '@/components/NavAdmin.vue';
     <div class="valorisation  top50">
       <h3 class="center">valorisation</h3>
       <div class="cartes" >
-        <table class="col-center" v-for="val in valorisations">
+        <table class="col-center" v-for="(val, index) in valorisations" :key="index">
             <tbody>
                     <tr><th>Andain: {{ val.andain }}</th></tr>
                     <tr><th>Lieu: {{ val.lieu }}</th></tr>
@@ -79,11 +108,15 @@ import NavAdmin from '@/components/NavAdmin.vue';
                     <tr><th>températue: {{ collecte.temperature }}</th></tr>
                     <tr><th>poids en kg: {{ collecte.poids }}</th></tr>
                     <tr><th>Modifier:</th></tr>
+                    <tr><th><label for="collecteur">Collecteur: <input class="collecteur" type="text" id="collecteur" v-model="collecteur[index]"></label></th></tr>
+                    <tr><th><label for="lieu">Lieu: <input class="lieu" type="texte" id="lieu" v-model="lieu[index]"></label></th></tr>
+                    <tr><th><label for="date">Date: <input class="date" type="date" id="date" v-model="date[index]"></label></th></tr>
+                    <tr><th><label for="heure">Heure: <input class="heure" type="time" id="heurebacs" v-model="heure[index]"></label></th></tr>
                     <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs" v-model="bac[index]"></label></th></tr>
                     <tr><th><div class="center"><label for="échange1:1">échange1:1 </label><input type="checkbox" id="échange1:1" class="checkbox" v-model="echange[index]"></div></th></tr>
                     <tr><th><label for="température">températue: <input class="bac" type="number" id="température" v-model="temperature[index]"></label></th></tr>
                     <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids" v-model="poids[index]"></th></tr>
-                    <tr><th><button class="btn">Enregistrer</button></th></tr>
+                    <tr><th><button class="btn" @click="enregistrer(index)">Enregistrer</button></th></tr>
             </tbody>
         </table>  
       </div>

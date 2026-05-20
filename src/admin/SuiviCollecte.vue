@@ -12,7 +12,7 @@ import NavAdmin from '@/components/NavAdmin.vue';
 <template>
     <NavAdmin></NavAdmin>
 
-    <h2>Suivi collectes</h2>
+    <h2 class="center">Suivi collectes</h2>
     <div class="col-center">
         <p>Aller dans stats collecte pour avoir l'historique des colllectes</p>
         <h3>Anomalies</h3>

@@ -59,6 +59,19 @@ export default{
       };
       this.valorisations.push(this.val);
       localStorage.setItem("valorisation", JSON.stringify(this.valorisations));
+      this.nom = null;
+      this.lieu = null;
+      this.date = null;
+      this.heure = null;
+      this.etape = null;
+      this.checkNFU = null;
+      this.temperature = null;
+      this.date1 = null;
+      this.date2 = null;
+      this.date3 = null;
+      this.check1 = null;
+      this.check2 = null;
+      this.check3 = null;
     }
   },
   mounted(){

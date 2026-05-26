@@ -74,7 +74,6 @@ export default{
                 lieu: lieu, 
                 date: date, 
                 heure: heure, 
-                Andain: this.nom[index],
                 bac: this.bac[index], 
                 echange: this.echange[index], 
                 temperature: this.temperature[index], 
@@ -160,7 +159,6 @@ export default{
     <div v-for="(collecte, index) in collectes" :key="index">
         <table class="col-center">
             <tbody>
-                    <!-- <tr><th><label for="nom">Andain</label> <input type="text" v-model="nom[index]"></th></tr> -->
                     <tr><th>Lieu: {{ collecte.lieu }}</th></tr>
                     <tr><th>Date: {{ toLocaleDateString(collecte.date) }}</th></tr>
                     <tr><th>Heure: {{ collecte.heure }}</th></tr>

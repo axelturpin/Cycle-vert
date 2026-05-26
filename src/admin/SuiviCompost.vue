@@ -1,64 +1,72 @@
 <script>
 import NavAdmin from '@/components/NavAdmin.vue';
-    export default{
-        data(){
-            return{
-                collectes: [],
-                collecteur: [],
-                lieu: [],
-                date: [],
-                heure: [],
-                bac: [], 
-                echange: [], 
-                temperature: [], 
-                poids: [],
-                valorisations: [],
-            }
-        },
-        methods:{
-            toLocaleDateString(date) {
-            const tempDate = new Date(date);
-            if(Number.isNaN(tempDate.getTime())){
-                return ("date NaN")
-            }
-                return tempDate.toLocaleDateString('fr-FR');
-            },
-            enregistrer(index){
-                // let inputCollecteur = document.querySelector(`.collecteur${index}`);
-                // let inputLieu = document.querySelector(`.lieu${index}`);
-                // let inputDate = document.querySelector(`.date${index}`);
-                // let inputHeure = document.querySelector(`.heure${index}`);
-                // let inputBac = document.querySelector(`.bac${index}`);
-                // let inputEchange = document.querySelector(`.echange${index}`);
-                // let inputTemperature = document.querySelector(`.temperature${index}`);
-                // let inputPoids = document.querySelector(`.poids${index}`);
-
-                this.collectes = this.collectes.map((collecte, i)=>{
-                    collecte.collecteur = this.collecteur[index];
-                    collecte.lieu = this.lieu[index];
-                    collecte.date = this.date[index];
-                    collecte.heure = this.heure[index];
-                    collecte.bac = this.toLocaleDateString(this.bac[index]);
-                    collecte.echange = this.echange[index];
-                    collecte.temperature = this.temperature[index];
-                    collecte.poids = this.poids[index];
-                    return(collecte);
-                })
-                localStorage.setItem("historique-collecteur", JSON.stringify(this.collectes));
-                console.log(this.collectes);
-            },
-        },
-        mounted(){
-            let storage = JSON.parse(localStorage.getItem("historique-collecteur")) || [];
-            this.collectes = Array.isArray(storage) ? storage : [];
-            this.valorisations = JSON.parse(localStorage.getItem("valorisation"));
-            // console.log(this.valorisations);
-            console.log(this.collectes);
-        },
-        computed(){
-            this.collectes;
+export default {
+    components: {
+        NavAdmin,
+    },
+    data() {
+        return {
+            collectes: [],
+            valorisations: [],
         }
-    }
+    },
+    methods: {
+        toLocaleDateString(date) {
+            const tempDate = new Date(date);
+            if (Number.isNaN(tempDate.getTime())) {
+                return 'date NaN';
+            }
+            return tempDate.toLocaleDateString('fr-FR');
+        },
+        normalizeDateValue(value) {
+            if (!value) {
+                return '';
+            }
+            if (value instanceof Date) {
+                return value.toISOString().slice(0, 10);
+            }
+            const stringValue = String(value).trim();
+            if (/^\d{4}-\d{2}-\d{2}$/.test(stringValue)) {
+                return stringValue;
+            }
+            if (/^\d{2}\/\d{2}\/\d{4}$/.test(stringValue)) {
+                const [day, month, year] = stringValue.split('/');
+                return `${year}-${month}-${day}`;
+            }
+            const parsed = new Date(stringValue);
+            if (!Number.isNaN(parsed.getTime())) {
+                return parsed.toISOString().slice(0, 10);
+            }
+            return '';
+        },
+        normalizeCollecte(collecte) {
+            return {
+                collecteur: collecte.collecteur || '',
+                lieu: collecte.lieu || '',
+                date: this.normalizeDateValue(collecte.date),
+                heure: collecte.heure || '',
+                bac: collecte.bac || '',
+                echange: collecte.echange === true || collecte.echange === 'true',
+                temperature: collecte.temperature || '',
+                poids: collecte.poids || '',
+            };
+        },
+        enregistrer(index) {
+            const collecte = this.collectes[index];
+            if (!collecte) {
+                return;
+            }
+            localStorage.setItem('historique-collecteur', JSON.stringify(this.collectes));
+            console.log('Collecte enregistrée', collecte);
+        },
+    },
+    mounted() {
+        const storage = JSON.parse(localStorage.getItem('historique-collecteur')) || [];
+        this.collectes = Array.isArray(storage) ? storage.map(this.normalizeCollecte) : [];
+        this.valorisations = JSON.parse(localStorage.getItem('valorisation')) || [];
+        console.log(this.collectes);
+    },
+}
 </script>
 
 <template>
@@ -108,14 +116,14 @@ import NavAdmin from '@/components/NavAdmin.vue';
                     <tr><th>températue: {{ collecte.temperature }}</th></tr>
                     <tr><th>poids en kg: {{ collecte.poids }}</th></tr>
                     <tr><th>Modifier:</th></tr>
-                    <tr><th><label for="collecteur">Collecteur: <input class="collecteur" type="text" id="collecteur" v-model="collecteur[index]"></label></th></tr>
-                    <tr><th><label for="lieu">Lieu: <input class="lieu" type="texte" id="lieu" v-model="lieu[index]"></label></th></tr>
-                    <tr><th><label for="date">Date: <input class="date" type="date" id="date" v-model="date[index]"></label></th></tr>
-                    <tr><th><label for="heure">Heure: <input class="heure" type="time" id="heurebacs" v-model="heure[index]"></label></th></tr>
-                    <tr><th><label for="bacs">nb bac: <input class="bac" type="number" id="bacs" v-model="bac[index]"></label></th></tr>
-                    <tr><th><div class="center"><label for="échange1:1">échange1:1 </label><input type="checkbox" id="échange1:1" class="checkbox" v-model="echange[index]"></div></th></tr>
-                    <tr><th><label for="température">températue: <input class="bac" type="number" id="température" v-model="temperature[index]"></label></th></tr>
-                    <tr><th><label for="poids">poids en kg: </label><input class="poids" type="number" id="poids" v-model="poids[index]"></th></tr>
+                    <tr><th><label :for="'collecteur-'+index">Collecteur: <input :class="'collecteur'+index" type="text" :id="'collecteur-'+index" v-model="collecte.collecteur"></label></th></tr>
+                    <tr><th><label :for="'lieu-'+index">Lieu: <input :class="'lieu'+index" type="text" :id="'lieu-'+index" v-model="collecte.lieu"></label></th></tr>
+                    <tr><th><label :for="'date-'+index">Date: <input :class="'date'+index" type="date" :id="'date-'+index" v-model="collecte.date"></label></th></tr>
+                    <tr><th><label :for="'heure-'+index">Heure: <input :class="'heure'+index" type="time" :id="'heure-'+index" v-model="collecte.heure"></label></th></tr>
+                    <tr><th><label :for="'bacs-'+index">nb bac: <input :class="'bac'+index" type="number" :id="'bacs-'+index" v-model="collecte.bac"></label></th></tr>
+                    <tr><th><div class="center"><label :for="'echange-'+index">échange1:1 </label><input type="checkbox" :id="'echange-'+index" :class="'checkbox'+index" v-model="collecte.echange"></div></th></tr>
+                    <tr><th><label :for="'temperature-'+index">températue: <input :class="'temperature'+index" type="number" :id="'temperature-'+index" v-model="collecte.temperature"></label></th></tr>
+                    <tr><th><label :for="'poids-'+index">poids en kg: </label><input :class="'poids'+index" type="number" :id="'poids-'+index" v-model="collecte.poids"></th></tr>
                     <tr><th><button class="btn" @click="enregistrer(index)">Enregistrer</button></th></tr>
             </tbody>
         </table>  

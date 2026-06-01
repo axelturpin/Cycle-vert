@@ -202,7 +202,7 @@ export default{
 
 <style scoped>
 .switch{
-    background-color: #A3B18A;
+    background-color: #64804E;
     border: 1px solid black;
     width: 180px;
     height: 36px;
@@ -254,7 +254,7 @@ tfoot td {
 }
 
     .menu-collecteur{
-        background-color: #A3B18A;
+        background-color: #64804E;
         position: absolute;
         transform: translateX(-50%) translateY(-50%);
         top: calc(92px + 186px);

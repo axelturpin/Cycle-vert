@@ -37,7 +37,7 @@ export default {
 
 header{
     height: 92px;
-    background-color: #A3B18A;
+    background-color: #64804E;
     display: flex;
     justify-content: space-between;
 }
@@ -67,7 +67,7 @@ body{
 .btn{
   text-decoration: none;
   color: black;
-  background-color: #A3B18A;
+  background-color: #64804E;
   border-radius: 20px;
   padding: 5px 20px;
   margin: 10px;
@@ -76,7 +76,7 @@ body{
 .big-btn{
   text-decoration: none;
   color: black;
-  background-color: #A3B18A;
+  background-color: #64804E;
   border-radius: 20px;
   padding: 5px 20px;
   margin: 18px;

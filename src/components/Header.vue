@@ -37,7 +37,7 @@ export default{
 <style scoped>
 header{
     height: 92px;
-    background-color: #A3B18A;
+    background-color: #64804E;
     display: flex;
     justify-content: space-between;
 }
